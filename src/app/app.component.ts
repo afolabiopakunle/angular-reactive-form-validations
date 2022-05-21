@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      fullName: [''],
+      fullName: ['My name'],
       email: ['', [Validators.email]],
       skill: this.fb.group({
         skillName: [''],
@@ -23,15 +23,16 @@ export class AppComponent implements OnInit {
     })
   }
 
-  loopFormGroup(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((key: string) => {
-      let abstractControl = formGroup.get(key);
-      if(abstractControl instanceof FormGroup) {
-        this.loopFormGroup(abstractControl)
-      } else {
-        console.log(`Key: ${key} | Value: ${abstractControl.value}`)
-      }
-    })
+
+  loopFormGroup(form: FormGroup) {
+   Object.keys(form.controls).forEach((key: string) => {
+     const abstractControl = form.get(key);
+     if(abstractControl instanceof FormGroup) {
+       this.loopFormGroup(abstractControl)
+     } else {
+       console.log(`Key: ${key} | Value: ${abstractControl.value}`)
+     }
+   })
   }
 
 }
