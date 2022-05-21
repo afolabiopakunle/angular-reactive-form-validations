@@ -1,3 +1,41 @@
-<p>
-  Start editing to see some magic happen :)
-</p>
+<div class="container p-5">
+  <form [formGroup]="form" ngSubmit="loopFormGroup(this.form)">
+    <div class="mb-3">
+      <label for="fullName" class="form-label">Full name</label>
+      <input type="text" class="form-control" id="fullName" formControlName="fullName">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+    <div formGroupName="skill">
+    <div class="row mb-3">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Skill name" aria-label="Skill name" formControlName="skillName">
+      </div>
+      <div class="col">
+        <input type="number" formControlName="experienceInYears" class="form-control" placeholder="Years" aria-label="Years">
+      </div>
+    </div>
+    <div class="form-check">
+      <input formControlName="proficiency" class="form-check-input" type="radio" name="proficiency" id="beginner" value="beginner" checked>
+      <label class="form-check-label" for="beginner">
+        Beginner
+      </label>
+    </div>
+    <div class="form-check">
+      <input formControlName="proficiency" class="form-check-input" type="radio" name="proficiency" id="exampleRadios2" value="mid-level">
+      <label class="form-check-label" for="exampleRadios2">
+        Mid-level
+      </label>
+    </div>
+    <div class="form-check mb-3">
+      <input formControlName="proficiency" class="form-check-input" type="radio" name="proficiency" id="senior" value="senior">
+      <label class="form-check-label" for="senior">
+        Senior
+      </label>
+    </div>
+    </div>
+    <button class="btn btn-primary">Click</button>
+  </form>
+</div>
