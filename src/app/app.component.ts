@@ -8,6 +8,26 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AppComponent implements OnInit {
   
+  validationMessages = {
+    fullName: {
+      required: 'Full name is required',
+      minlength: 'Full name must be greater than two characters',
+      maxlength: 'Full name must be less than twelve characters'
+    },
+    email: {
+      required: 'Email is required'
+    },
+    skillName: {
+      required: 'Skill name is required'
+    },
+    experienceInYears: {
+      required: 'Experience in years is required'
+    },
+    proficiency: {
+      required: 'Proficiency is required'
+    }
+
+  }
   form: FormGroup;
   constructor(private fb: FormBuilder) {}
 
@@ -25,6 +45,7 @@ export class AppComponent implements OnInit {
 
 
   loopFormGroup(form: FormGroup) {
+    console.log(this.form.controls)
    Object.keys(form.controls).forEach((key: string) => {
      const abstractControl = form.get(key);
      if(abstractControl instanceof FormGroup) {
