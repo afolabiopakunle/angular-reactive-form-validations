@@ -1,5 +1,5 @@
 <div class="container p-5">
-  <form [formGroup]="form" ngSubmit="loopFormGroup(this.form)">
+  <form [formGroup]="form" (ngSubmit)="loopFormGroup(this.form)">
     <div class="mb-3">
       <label for="fullName" class="form-label">Full name</label>
       <input type="text" class="form-control" id="fullName" formControlName="fullName">
