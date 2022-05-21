@@ -26,9 +26,17 @@ export class AppComponent implements OnInit {
     proficiency: {
       required: 'Proficiency is required'
     }
+  }
 
+  formErrors = {
+    fullName: '',
+    email: '',
+    skillName: '',
+    experienceInYears: '',
+    proficiency: ''
   }
   form: FormGroup;
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
