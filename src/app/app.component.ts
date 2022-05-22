@@ -84,7 +84,6 @@ export class AppComponent implements OnInit {
     this.form.get('phone').updateValueAndValidity()
   }
   logValidationErrors(form: FormGroup) {
-    this.updateValidator(this.form.get('contactPreference').value)
    Object.keys(form.controls).forEach((key: string ) => {
      const abstractControl = form.get(key);
      if(abstractControl instanceof FormGroup) {
