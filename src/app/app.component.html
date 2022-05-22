@@ -7,13 +7,44 @@
         {{formErrors.fullName}}
       </div>
     </div>
+    <div>
+      <p>Contact preference</p>
+    </div>
+    <div class="form-check">
+      <input formControlName="contactPreference" 
+      class="form-check-input" type="radio" name="contactPreference" id="email" value="email">
+      <div class="invalid-feedback">
+        {{ formErrors.contactPreference }}
+      </div>
+      <label class="form-check-label" for="email">
+        Email
+      </label>
+    </div>
+    <div class="form-check">
+      <input formControlName="contactPreference" 
+      class="form-check-input" type="radio" name="contactPreference" id="phone" value="phone">
+      <div class="invalid-feedback">
+        {{ formErrors.contactPreference }}
+      </div>
+      <label class="form-check-label" for="phone">
+        Phone
+      </label>
+    </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
       <input type="email" class="form-control" id="email" formControlName="email"
       [ngClass]="{'is-invalid': formErrors.email}" (blur)="logValidationErrors(form)"
       >
-      <div class="invalid-feedback">
+      <div class="invalid-feedback" >
         {{formErrors.email}}
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="phone" formControlName="phone" (blur)="logValidationErrors(form)"
+      [ngClass]="{'is-invalid': formErrors.phone}">
+      <div class="invalid-feedback">
+        {{ formErrors.phone }}
       </div>
     </div>
     <div formGroupName="skill">

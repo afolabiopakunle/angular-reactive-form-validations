@@ -18,6 +18,12 @@ export class AppComponent implements OnInit {
       required: 'Email is required',
       email: 'This is not a valid email address'
     },
+    phone: {
+      required: 'Phone number is required',
+    },
+    contactPreference: {
+      required: 'Contact preference is required'
+    },
     skillName: {
       required: 'Skill name is required'
     },
@@ -33,6 +39,8 @@ export class AppComponent implements OnInit {
   formErrors = {
     fullName: '',
     email: '',
+    contactPreference: '',
+    phone: '',
     skillName: '',
     experienceInYears: '',
     proficiency: ''
@@ -45,6 +53,8 @@ export class AppComponent implements OnInit {
     this.form = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       email: ['', [Validators.email, Validators.required]],
+      phone: [''],
+      contactPreference: ['email'],
       skill: this.fb.group({
         skillName: ['', Validators.required],
         experienceInYears: ['', [Validators.required, Validators.min(1)]],
@@ -52,13 +62,29 @@ export class AppComponent implements OnInit {
       })
     })
 
+    this.form.get('contactPreference').valueChanges.subscribe(data => {
+      this.updateValidator(data)
+      console.log(data)
+    })
+
     this.form.valueChanges.subscribe(data => {
       this.logValidationErrors(this.form)
     })
   }
 
+  updateValidator(data) { 
+    if(data === 'phone') {
+      this.form.get('phone').setValidators(Validators.required)
+      this.form.get('email').clearValidators();
+    } else {
+      this.form.get('phone').clearValidators();
+      this.form.get('email').setValidators(Validators.required)
+    }
 
+    this.form.get('phone').updateValueAndValidity()
+  }
   logValidationErrors(form: FormGroup) {
+    this.updateValidator(this.form.get('contactPreference').value)
    Object.keys(form.controls).forEach((key: string ) => {
      const abstractControl = form.get(key);
      if(abstractControl instanceof FormGroup) {
