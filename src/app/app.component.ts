@@ -15,13 +15,15 @@ export class AppComponent implements OnInit {
       maxlength: 'Full name must be less than twelve characters'
     },
     email: {
-      required: 'Email is required'
+      required: 'Email is required',
+      email: 'This is not a valid email address'
     },
     skillName: {
       required: 'Skill name is required'
     },
     experienceInYears: {
-      required: 'Experience in years is required'
+      required: 'Experience in years is required',
+      min: 'Minimum experience in years is 1'
     },
     proficiency: {
       required: 'Proficiency is required'
@@ -41,7 +43,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(2)]],
+      fullName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       email: ['', [Validators.email, Validators.required]],
       skill: this.fb.group({
         skillName: ['', Validators.required],
@@ -49,19 +51,35 @@ export class AppComponent implements OnInit {
         proficiency: ['', Validators.required]
       })
     })
+
+    this.form.valueChanges.subscribe(data => {
+      this.logValidationErrors(this.form)
+    })
   }
 
 
-  loopFormGroup(form: FormGroup) {
-    console.log(this.form.controls)
+  logValidationErrors(form: FormGroup) {
    Object.keys(form.controls).forEach((key: string) => {
      const abstractControl = form.get(key);
      if(abstractControl instanceof FormGroup) {
-       this.loopFormGroup(abstractControl)
+       this.logValidationErrors(abstractControl)
      } else {
-       console.log(`Key: ${key} | Value: ${abstractControl.value}`)
+       this.formErrors[key] = '';
+       if(abstractControl && abstractControl.invalid) {
+         const message = this.validationMessages[key];
+         for(const errorKey in abstractControl.errors) {
+           if(errorKey) {
+             this.formErrors[key] += message[errorKey] + ' ';
+           }
+         }
+       }
      }
    })
+   console.log(this.formErrors)
+  }
+
+  submit() {
+
   }
 
 }
