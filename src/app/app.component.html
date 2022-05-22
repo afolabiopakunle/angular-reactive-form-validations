@@ -2,7 +2,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()" >
     <div class="mb-3">
       <label for="fullName" class="form-label">Full name</label>
-      <input type="text" class="form-control has-validation" [ngClass]="{'is-invalid': formErrors.fullName}" id="fullName" formControlName="fullName">
+      <input type="text" class="form-control has-validation" [ngClass]="{'is-invalid': formErrors.fullName}" id="fullName" formControlName="fullName" (blur)="logValidationErrors(form)">
       <div class="invalid-feedback">
         {{formErrors.fullName}}
       </div>
@@ -10,7 +10,7 @@
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
       <input type="email" class="form-control" id="email" formControlName="email"
-      [ngClass]="{'is-invalid': formErrors.email}"
+      [ngClass]="{'is-invalid': formErrors.email}" (blur)="logValidationErrors(form)"
       >
       <div class="invalid-feedback">
         {{formErrors.email}}
@@ -19,20 +19,20 @@
     <div formGroupName="skill">
     <div class="row mb-3">
       <div class="col">
-        <input type="text" [ngClass]="{'is-invalid': formErrors.skillName}" class="form-control" placeholder="Skill name" aria-label="Skill name" formControlName="skillName">
+        <input type="text" [ngClass]="{'is-invalid': formErrors.skillName}" class="form-control" placeholder="Skill name" aria-label="Skill name" formControlName="skillName" (blur)="logValidationErrors(form)">
         <div class="invalid-feedback">
           {{ formErrors.skillName }}
         </div>
       </div>
       <div class="col">
-        <input type="number" [ngClass]="{'is-invalid': formErrors.experienceInYears}"  formControlName="experienceInYears" class="form-control" placeholder="Years" aria-label="Years">
+        <input type="number" [ngClass]="{'is-invalid': formErrors.experienceInYears}"  formControlName="experienceInYears" class="form-control" placeholder="Years" aria-label="Years" (blur)="logValidationErrors(form)">
         <div class="invalid-feedback">
           {{ formErrors.experienceInYears }}
         </div>
       </div>
     </div>
     <div class="form-check">
-      <input formControlName="proficiency" [ngClass]="{'is-invalid': formErrors.proficiency}" class="form-check-input" type="radio" name="proficiency" id="beginner" value="beginner" checked>
+      <input formControlName="proficiency" [ngClass]="{'is-invalid': formErrors.proficiency}" class="form-check-input" type="radio" name="proficiency" id="beginner" value="beginner" (blur)="logValidationErrors(form)">
       <div class="invalid-feedback">
         {{ formErrors.proficiency }}
       </div> 
@@ -41,7 +41,7 @@
       </label>
     </div>
     <div class="form-check">
-      <input formControlName="proficiency" [ngClass]="{'is-invalid': formErrors.proficiency}" class="form-check-input" type="radio" name="proficiency" id="exampleRadios2" value="mid-level">
+      <input formControlName="proficiency" [ngClass]="{'is-invalid': formErrors.proficiency}" class="form-check-input" type="radio" name="proficiency" id="exampleRadios2" value="mid-level" (blur)="logValidationErrors(form)">
       <div class="invalid-feedback">
         {{ formErrors.proficiency }}
       </div>
@@ -50,7 +50,7 @@
       </label>
     </div>
     <div class="form-check mb-3">
-      <input formControlName="proficiency" [ngClass]="{'is-invalid': formErrors.proficiency}" class="form-check-input" type="radio" name="proficiency" id="senior" value="senior">
+      <input formControlName="proficiency" [ngClass]="{'is-invalid': formErrors.proficiency}" class="form-check-input" type="radio" name="proficiency" id="senior" value="senior" (blur)="logValidationErrors(form)">
       <div class="invalid-feedback">
         {{ formErrors.proficiency }}
       </div>

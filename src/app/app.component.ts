@@ -59,13 +59,13 @@ export class AppComponent implements OnInit {
 
 
   logValidationErrors(form: FormGroup) {
-   Object.keys(form.controls).forEach((key: string) => {
+   Object.keys(form.controls).forEach((key: string ) => {
      const abstractControl = form.get(key);
      if(abstractControl instanceof FormGroup) {
        this.logValidationErrors(abstractControl)
      } else {
        this.formErrors[key] = '';
-       if(abstractControl && abstractControl.invalid) {
+       if(abstractControl && abstractControl.invalid && (abstractControl.touched || abstractControl.dirty)) {
          const message = this.validationMessages[key];
          for(const errorKey in abstractControl.errors) {
            if(errorKey) {
