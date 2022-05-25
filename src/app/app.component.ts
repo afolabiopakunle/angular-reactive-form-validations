@@ -1,5 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'my-app',
@@ -55,11 +55,9 @@ export class AppComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       phone: [''],
       contactPreference: ['email'],
-      skill: this.fb.group({
-        skillName: ['', Validators.required],
-        experienceInYears: ['', [Validators.required, Validators.min(1)]],
-        proficiency: ['', Validators.required]
-      })
+      skills: this.fb.array([
+        this.addSkill()
+      ])
     })
 
     this.form.get('contactPreference').valueChanges.subscribe(data => {
@@ -104,7 +102,16 @@ export class AppComponent implements OnInit {
   }
 
   submit() {
-
+    console.log(this.form.value)
   }
+
+  addSkill(): FormGroup {
+    return this.fb.group({
+      skillName: ['', Validators.required],
+      experienceInYears: ['', [Validators.required, Validators.min(1)]],
+      proficiency: ['', Validators.required]
+    })
+  }
+
 
 }

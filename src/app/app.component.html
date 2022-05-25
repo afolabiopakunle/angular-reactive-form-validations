@@ -47,7 +47,8 @@
         {{ formErrors.phone }}
       </div>
     </div>
-    <div formGroupName="skill" class="skill">
+    <div formArrayName="skills" class="skill">
+      <div formGroupName='0'>
     <div class="row mb-3">
       <div class="col">
         <input type="text" [ngClass]="{'is-invalid': formErrors.skillName}" class="form-control" placeholder="Skill name" aria-label="Skill name" formControlName="skillName" (blur)="logValidationErrors(form)">
@@ -91,7 +92,10 @@
       </label>
     </div>
     </div>
+      </div>
     </div>
+    <div style="display: flex">
+    <button class="btn btn-sm btn-secondary ms-auto mb-4" (click)="addSkill()">Add Skill</button></div><br>
     <button class="btn btn-primary">Submit</button>
   </form>
 </div>
